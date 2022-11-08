@@ -9,8 +9,9 @@ from smtplib import SMTP
 
 class IPWatcher:
 
-    SMTP_FILENAME = 'smtp.json'
-    IP_FILENAME = 'ip.json'
+    DATA_DIRECTORY = 'data'
+    SMTP_FILENAME = DATA_DIRECTORY + '/smtp.json'
+    IP_FILENAME = DATA_DIRECTORY + '/ip.json'
 
     def __init__(self):
         self._load_data()

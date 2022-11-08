@@ -1,0 +1,11 @@
+
+services:
+
+  ipwatcher:
+    image: ipwatcher
+    build: .
+    volumes:
+      - type: bind
+        source: ipwatcher_data/
+        target: /app/data/
+
