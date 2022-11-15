@@ -2,8 +2,8 @@
 FROM python:latest
 
 RUN pip install requests
-COPY ipwatcher.py /app/ipwatcher.py
+COPY app.py /app/app.py
 
 WORKDIR /app
-CMD ["python", "/app/ipwatcher.py"]
+CMD ["python", "/app/app.py"]
 
