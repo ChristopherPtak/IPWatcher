@@ -8,4 +8,5 @@ services:
       - type: bind
         source: ipwatcher_data/
         target: /app/data/
+    restart: unless-stopped
 
