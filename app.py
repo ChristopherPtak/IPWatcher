@@ -1,5 +1,6 @@
 
 import json
+import re
 import requests
 import time
 
@@ -53,7 +54,11 @@ class IPWatcher:
 
     def _get_current_ip(self):
         API_URL = 'https://api.ipify.org'
-        return requests.get(API_URL).content.decode('utf-8')
+        ip_address = requests.get(API_URL).content.decode('utf-8')
+        if re.fullmatch(r'[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+', ip_address):
+            return ip_address
+        else:
+            raise RuntimeError('Could not fetch IP')
 
     def _send_email(self, subject, content):
         message = MIMEText(content)
@@ -85,7 +90,10 @@ class IPWatcher:
 
     def check_for_ip_change(self):
         previous_ip = self.ip_address
-        current_ip = self._get_current_ip()
+        try:
+            current_ip = self._get_current_ip()
+        except RuntimeError:
+            return
 
         if current_ip != previous_ip:
             self.ip_address = current_ip
